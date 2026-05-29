@@ -1,233 +1,562 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Homepage</title>
-<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;600&family=Syne:wght@400;700;800&display=swap" rel="stylesheet">
-<style>
-  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-  :root {
-    --bg: #0a0a0a; --surface: #111111; --surface2: #1a1a1a;
-    --border: rgba(255,255,255,0.08); --text: #f0f0f0; --muted: #555;
-    --accent: #ffffff; --ring-bg: #1e1e1e;
-  }
-  html, body { min-height: 100vh; background: var(--bg); color: var(--text); font-family: 'Syne', sans-serif; }
-  body { display: flex; flex-direction: column; align-items: center; padding: 3rem 1.5rem 5rem; gap: 3rem; }
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Homepage</title>
+    <link
+      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;600&family=Syne:wght@400;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+      }
+      :root {
+        --bg: #0a0a0a;
+        --surface: #111111;
+        --surface2: #1a1a1a;
+        --border: rgba(255, 255, 255, 0.08);
+        --text: #f0f0f0;
+        --muted: #555;
+        --accent: #ffffff;
+        --ring-bg: #1e1e1e;
+      }
+      html,
+      body {
+        min-height: 100vh;
+        background: var(--bg);
+        color: var(--text);
+        font-family: "Syne", sans-serif;
+      }
+      body {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 3rem 1.5rem 5rem;
+        gap: 3rem;
+      }
 
-  .grain {
-    position: fixed; inset: 0; pointer-events: none; z-index: 0; opacity: 0.35;
-    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E");
-  }
+      .grain {
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        z-index: 0;
+        opacity: 0.35;
+        background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E");
+      }
 
-  .wrapper { position: relative; z-index: 1; width: 100%; max-width: 780px; display: flex; flex-direction: column; align-items: center; gap: 3rem; }
+      .wrapper {
+        position: relative;
+        z-index: 1;
+        width: 100%;
+        max-width: 780px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 3rem;
+      }
 
-  .greeting { text-align: center; opacity: 0; animation: fadeUp 0.6s ease forwards 0.1s; }
-  .greeting .time-live { font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; color: var(--muted); letter-spacing: 0.18em; margin-bottom: 0.5rem; }
-  .greeting h1 { font-size: clamp(1.3rem, 4vw, 2rem); font-weight: 700; letter-spacing: -0.02em; }
+      .greeting {
+        text-align: center;
+        opacity: 0;
+        animation: fadeUp 0.6s ease forwards 0.1s;
+      }
+      .greeting .time-live {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 0.72rem;
+        color: var(--muted);
+        letter-spacing: 0.18em;
+        margin-bottom: 0.5rem;
+      }
+      .greeting h1 {
+        font-size: clamp(1.3rem, 4vw, 2rem);
+        font-weight: 700;
+        letter-spacing: -0.02em;
+      }
 
-  .countdown-card {
-    width: 100%; background: var(--surface); border: 1px solid var(--border);
-    border-radius: 20px; padding: 2.5rem 2rem 2rem;
-    display: flex; flex-direction: column; align-items: center; gap: 0.6rem;
-    opacity: 0; animation: fadeUp 0.6s ease forwards 0.25s;
-  }
-  .countdown-label { font-size: 0.6rem; font-family: 'JetBrains Mono', monospace; letter-spacing: 0.22em; color: var(--muted); text-transform: uppercase; }
-  .countdown-title { font-size: 0.82rem; color: rgba(255,255,255,0.25); font-weight: 400; margin-bottom: 1rem; }
+      .countdown-card {
+        width: 100%;
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 20px;
+        padding: 2.5rem 2rem 2rem;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.6rem;
+        opacity: 0;
+        animation: fadeUp 0.6s ease forwards 0.25s;
+      }
+      .countdown-label {
+        font-size: 0.6rem;
+        font-family: "JetBrains Mono", monospace;
+        letter-spacing: 0.22em;
+        color: var(--muted);
+        text-transform: uppercase;
+      }
+      .countdown-title {
+        font-size: 0.82rem;
+        color: rgba(255, 255, 255, 0.25);
+        font-weight: 400;
+        margin-bottom: 1rem;
+      }
 
-  .rings-row { display: flex; flex-wrap: wrap; justify-content: center; gap: clamp(1rem, 4vw, 2.5rem); padding: 0.5rem 0; }
-  .ring-unit { display: flex; flex-direction: column; align-items: center; gap: 0.7rem; }
-  .ring-wrap { position: relative; width: clamp(78px, 18vw, 108px); height: clamp(78px, 18vw, 108px); }
-  .ring-wrap svg { width: 100%; height: 100%; transform: rotate(-90deg); }
-  .ring-bg-c { fill: none; stroke: var(--ring-bg); }
-  .ring-prog { fill: none; stroke: #fff; stroke-linecap: round; transition: stroke-dashoffset 0.8s cubic-bezier(0.4,0,0.2,1); }
-  .ring-number { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-family: 'JetBrains Mono', monospace; font-size: clamp(1.25rem, 4vw, 1.75rem); font-weight: 600; letter-spacing: -0.04em; }
-  .ring-name { font-size: 0.6rem; font-family: 'JetBrains Mono', monospace; letter-spacing: 0.2em; color: var(--muted); text-transform: uppercase; }
+      .rings-row {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: clamp(1rem, 4vw, 2.5rem);
+        padding: 0.5rem 0;
+      }
+      .ring-unit {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 0.7rem;
+      }
+      .ring-wrap {
+        position: relative;
+        width: clamp(78px, 18vw, 108px);
+        height: clamp(78px, 18vw, 108px);
+      }
+      .ring-wrap svg {
+        width: 100%;
+        height: 100%;
+        transform: rotate(-90deg);
+      }
+      .ring-bg-c {
+        fill: none;
+        stroke: var(--ring-bg);
+      }
+      .ring-prog {
+        fill: none;
+        stroke: #fff;
+        stroke-linecap: round;
+        transition: stroke-dashoffset 0.8s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+      .ring-number {
+        position: absolute;
+        inset: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: "JetBrains Mono", monospace;
+        font-size: clamp(1.25rem, 4vw, 1.75rem);
+        font-weight: 600;
+        letter-spacing: -0.04em;
+      }
+      .ring-name {
+        font-size: 0.6rem;
+        font-family: "JetBrains Mono", monospace;
+        letter-spacing: 0.2em;
+        color: var(--muted);
+        text-transform: uppercase;
+      }
 
-  .bookmarks-section { width: 100%; opacity: 0; animation: fadeUp 0.6s ease forwards 0.45s; display: flex; flex-direction: column; gap: 2rem; }
+      .bookmarks-section {
+        width: 100%;
+        opacity: 0;
+        animation: fadeUp 0.6s ease forwards 0.45s;
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+      }
 
-  .category-block { display: flex; flex-direction: column; gap: 0.85rem; }
+      .category-block {
+        display: flex;
+        flex-direction: column;
+        gap: 0.85rem;
+      }
 
-  .category-header { display: flex; align-items: center; gap: 0.65rem; }
-  .category-header .line { flex: 1; height: 1px; background: var(--border); }
-  .category-header .tag { font-size: 0.58rem; font-family: 'JetBrains Mono', monospace; letter-spacing: 0.2em; color: var(--muted); text-transform: uppercase; white-space: nowrap; }
-  .category-header .emoji { font-size: 0.85rem; }
+      .category-header {
+        display: flex;
+        align-items: center;
+        gap: 0.65rem;
+      }
+      .category-header .line {
+        flex: 1;
+        height: 1px;
+        background: var(--border);
+      }
+      .category-header .tag {
+        font-size: 0.58rem;
+        font-family: "JetBrains Mono", monospace;
+        letter-spacing: 0.2em;
+        color: var(--muted);
+        text-transform: uppercase;
+        white-space: nowrap;
+      }
+      .category-header .emoji {
+        font-size: 0.85rem;
+      }
 
-  .bookmarks-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(130px, 1fr)); gap: 0.65rem; }
+      .bookmarks-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
+        gap: 0.65rem;
+      }
 
-  .bookmark {
-    background: var(--surface); border: 1px solid var(--border); border-radius: 14px;
-    padding: 0.9rem; display: flex; flex-direction: column; align-items: flex-start; gap: 0.45rem;
-    cursor: pointer; text-decoration: none; transition: border-color 0.2s, transform 0.15s, background 0.2s;
-  }
-  .bookmark:hover { border-color: rgba(255,255,255,0.2); transform: translateY(-2px); background: #161616; }
-  .bookmark-icon { font-size: 1.1rem; line-height: 1; }
-  .bookmark-name { font-size: 0.78rem; font-weight: 700; color: var(--text); line-height: 1.2; }
-  .bookmark-url { font-size: 0.58rem; font-family: 'JetBrains Mono', monospace; color: var(--muted); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; width: 100%; }
+      .bookmark {
+        background: var(--surface);
+        border: 1px solid var(--border);
+        border-radius: 14px;
+        padding: 0.9rem;
+        display: flex;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 0.45rem;
+        cursor: pointer;
+        text-decoration: none;
+        transition:
+          border-color 0.2s,
+          transform 0.15s,
+          background 0.2s;
+      }
+      .bookmark:hover {
+        border-color: rgba(255, 255, 255, 0.2);
+        transform: translateY(-2px);
+        background: #161616;
+      }
+      .bookmark-icon {
+        font-size: 1.1rem;
+        line-height: 1;
+      }
+      .bookmark-name {
+        font-size: 0.78rem;
+        font-weight: 700;
+        color: var(--text);
+        line-height: 1.2;
+      }
+      .bookmark-url {
+        font-size: 0.58rem;
+        font-family: "JetBrains Mono", monospace;
+        color: var(--muted);
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        width: 100%;
+      }
 
-  .add-bm {
-    background: transparent; border: 1px dashed rgba(255,255,255,0.1); border-radius: 14px;
-    padding: 0.9rem; display: flex; align-items: center; justify-content: center; gap: 0.4rem;
-    cursor: pointer; transition: border-color 0.2s, background 0.2s; min-height: 82px; flex-direction: column;
-  }
-  .add-bm:hover { border-color: rgba(255,255,255,0.28); background: var(--surface); }
-  .add-bm .plus { font-size: 1.1rem; color: var(--muted); line-height: 1; }
-  .add-bm .lbl { font-size: 0.58rem; font-family: 'JetBrains Mono', monospace; color: var(--muted); letter-spacing: 0.1em; }
+      .add-bm {
+        background: transparent;
+        border: 1px dashed rgba(255, 255, 255, 0.1);
+        border-radius: 14px;
+        padding: 0.9rem;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 0.4rem;
+        cursor: pointer;
+        transition:
+          border-color 0.2s,
+          background 0.2s;
+        min-height: 82px;
+        flex-direction: column;
+      }
+      .add-bm:hover {
+        border-color: rgba(255, 255, 255, 0.28);
+        background: var(--surface);
+      }
+      .add-bm .plus {
+        font-size: 1.1rem;
+        color: var(--muted);
+        line-height: 1;
+      }
+      .add-bm .lbl {
+        font-size: 0.58rem;
+        font-family: "JetBrains Mono", monospace;
+        color: var(--muted);
+        letter-spacing: 0.1em;
+      }
 
-  .error-msg { font-family: 'JetBrains Mono', monospace; font-size: 0.72rem; color: #ff6b6b; text-align: center; padding: 1rem; }
+      .error-msg {
+        font-family: "JetBrains Mono", monospace;
+        font-size: 0.72rem;
+        color: #ff6b6b;
+        text-align: center;
+        padding: 1rem;
+      }
 
-  @keyframes fadeUp { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+      @keyframes fadeUp {
+        from {
+          opacity: 0;
+          transform: translateY(16px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
 
-  @media (max-width: 480px) {
-    .rings-row { gap: 0.9rem; }
-    .bookmarks-grid { grid-template-columns: repeat(auto-fill, minmax(110px, 1fr)); }
-  }
-</style>
-</head>
-<body>
-<div class="grain"></div>
-<div class="wrapper">
-
-  <div class="greeting">
-    <div class="time-live" id="live-time">—</div>
-    <h1 id="greet-text">Good morning, Maverick.</h1>
-  </div>
-
-  <div class="countdown-card">
-    <div class="countdown-label">Counting down to</div>
-    <div class="countdown-title">9th October 2026 — 00:00:00</div>
-    <div class="rings-row">
-      <div class="ring-unit">
-        <div class="ring-wrap">
-          <svg viewBox="0 0 100 100"><circle class="ring-bg-c" cx="50" cy="50" r="43" stroke-width="5"/><circle class="ring-prog" id="ring-days" cx="50" cy="50" r="43" stroke-width="5" stroke-dasharray="270.2" stroke-dashoffset="270.2"/></svg>
-          <div class="ring-number" id="num-days">—</div>
-        </div>
-        <div class="ring-name">Days</div>
+      @media (max-width: 480px) {
+        .rings-row {
+          gap: 0.9rem;
+        }
+        .bookmarks-grid {
+          grid-template-columns: repeat(auto-fill, minmax(110px, 1fr));
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="grain"></div>
+    <div class="wrapper">
+      <div class="greeting">
+        <div class="time-live" id="live-time">—</div>
+        <h1 id="greet-text">Good morning, Maverick.</h1>
       </div>
-      <div class="ring-unit">
-        <div class="ring-wrap">
-          <svg viewBox="0 0 100 100"><circle class="ring-bg-c" cx="50" cy="50" r="43" stroke-width="5"/><circle class="ring-prog" id="ring-hours" cx="50" cy="50" r="43" stroke-width="5" stroke-dasharray="270.2" stroke-dashoffset="270.2"/></svg>
-          <div class="ring-number" id="num-hours">—</div>
+
+      <div class="countdown-card">
+        <div class="countdown-label">Counting down to</div>
+        <div class="countdown-title">9th October 2026 — 00:00:00</div>
+        <div class="rings-row">
+          <div class="ring-unit">
+            <div class="ring-wrap">
+              <svg viewBox="0 0 100 100">
+                <circle
+                  class="ring-bg-c"
+                  cx="50"
+                  cy="50"
+                  r="43"
+                  stroke-width="5"
+                />
+                <circle
+                  class="ring-prog"
+                  id="ring-days"
+                  cx="50"
+                  cy="50"
+                  r="43"
+                  stroke-width="5"
+                  stroke-dasharray="270.2"
+                  stroke-dashoffset="270.2"
+                />
+              </svg>
+              <div class="ring-number" id="num-days">—</div>
+            </div>
+            <div class="ring-name">Days</div>
+          </div>
+          <div class="ring-unit">
+            <div class="ring-wrap">
+              <svg viewBox="0 0 100 100">
+                <circle
+                  class="ring-bg-c"
+                  cx="50"
+                  cy="50"
+                  r="43"
+                  stroke-width="5"
+                />
+                <circle
+                  class="ring-prog"
+                  id="ring-hours"
+                  cx="50"
+                  cy="50"
+                  r="43"
+                  stroke-width="5"
+                  stroke-dasharray="270.2"
+                  stroke-dashoffset="270.2"
+                />
+              </svg>
+              <div class="ring-number" id="num-hours">—</div>
+            </div>
+            <div class="ring-name">Hours</div>
+          </div>
+          <div class="ring-unit">
+            <div class="ring-wrap">
+              <svg viewBox="0 0 100 100">
+                <circle
+                  class="ring-bg-c"
+                  cx="50"
+                  cy="50"
+                  r="43"
+                  stroke-width="5"
+                />
+                <circle
+                  class="ring-prog"
+                  id="ring-mins"
+                  cx="50"
+                  cy="50"
+                  r="43"
+                  stroke-width="5"
+                  stroke-dasharray="270.2"
+                  stroke-dashoffset="270.2"
+                />
+              </svg>
+              <div class="ring-number" id="num-mins">—</div>
+            </div>
+            <div class="ring-name">Minutes</div>
+          </div>
+          <div class="ring-unit">
+            <div class="ring-wrap">
+              <svg viewBox="0 0 100 100">
+                <circle
+                  class="ring-bg-c"
+                  cx="50"
+                  cy="50"
+                  r="43"
+                  stroke-width="5"
+                />
+                <circle
+                  class="ring-prog"
+                  id="ring-secs"
+                  cx="50"
+                  cy="50"
+                  r="43"
+                  stroke-width="5"
+                  stroke-dasharray="270.2"
+                  stroke-dashoffset="270.2"
+                />
+              </svg>
+              <div class="ring-number" id="num-secs">—</div>
+            </div>
+            <div class="ring-name">Seconds</div>
+          </div>
         </div>
-        <div class="ring-name">Hours</div>
       </div>
-      <div class="ring-unit">
-        <div class="ring-wrap">
-          <svg viewBox="0 0 100 100"><circle class="ring-bg-c" cx="50" cy="50" r="43" stroke-width="5"/><circle class="ring-prog" id="ring-mins" cx="50" cy="50" r="43" stroke-width="5" stroke-dasharray="270.2" stroke-dashoffset="270.2"/></svg>
-          <div class="ring-number" id="num-mins">—</div>
-        </div>
-        <div class="ring-name">Minutes</div>
-      </div>
-      <div class="ring-unit">
-        <div class="ring-wrap">
-          <svg viewBox="0 0 100 100"><circle class="ring-bg-c" cx="50" cy="50" r="43" stroke-width="5"/><circle class="ring-prog" id="ring-secs" cx="50" cy="50" r="43" stroke-width="5" stroke-dasharray="270.2" stroke-dashoffset="270.2"/></svg>
-          <div class="ring-number" id="num-secs">—</div>
-        </div>
-        <div class="ring-name">Seconds</div>
-      </div>
+
+      <div class="bookmarks-section" id="bm-section"></div>
     </div>
-  </div>
 
-  <div class="bookmarks-section" id="bm-section"></div>
+    <script>
+      const TARGET = new Date("2026-10-09T00:00:00");
+      const CIRC = 2 * Math.PI * 43;
 
-</div>
+      function setRing(ringId, numId, value, max) {
+        const pct = Math.max(0, Math.min(1, value / max));
+        const el = document.getElementById(ringId);
+        el.style.strokeDasharray = CIRC;
+        el.style.strokeDashoffset = CIRC * (1 - pct);
+        document.getElementById(numId).textContent = String(value).padStart(
+          2,
+          "0",
+        );
+      }
 
-<script>
-const TARGET = new Date('2026-10-09T00:00:00');
-const CIRC = 2 * Math.PI * 43;
+      function tick() {
+        const diff = TARGET - new Date();
+        if (diff <= 0) {
+          ["days", "hours", "mins", "secs"].forEach((k) => {
+            document.getElementById("num-" + k).textContent = "00";
+          });
+          return;
+        }
+        setRing("ring-days", "num-days", Math.floor(diff / 86400000), 365);
+        setRing(
+          "ring-hours",
+          "num-hours",
+          Math.floor((diff % 86400000) / 3600000),
+          24,
+        );
+        setRing(
+          "ring-mins",
+          "num-mins",
+          Math.floor((diff % 3600000) / 60000),
+          60,
+        );
+        setRing("ring-secs", "num-secs", Math.floor((diff % 60000) / 1000), 60);
+      }
 
-function setRing(ringId, numId, value, max) {
-  const pct = Math.max(0, Math.min(1, value / max));
-  const el = document.getElementById(ringId);
-  el.style.strokeDasharray = CIRC;
-  el.style.strokeDashoffset = CIRC * (1 - pct);
-  document.getElementById(numId).textContent = String(value).padStart(2, '0');
-}
+      function updateClock() {
+        const now = new Date();
+        const h = now.getHours(),
+          m = now.getMinutes(),
+          s = now.getSeconds();
+        const ampm = h >= 12 ? "PM" : "AM";
+        const hh = h % 12 || 12;
+        document.getElementById("live-time").textContent =
+          String(hh).padStart(2, "0") +
+          ":" +
+          String(m).padStart(2, "0") +
+          ":" +
+          String(s).padStart(2, "0") +
+          " " +
+          ampm;
+        const period = h < 12 ? "morning" : h < 17 ? "afternoon" : "evening";
+        document.getElementById("greet-text").textContent =
+          `Good ${period}, Maverick.`;
+      }
 
-function tick() {
-  const diff = TARGET - new Date();
-  if (diff <= 0) { ['days','hours','mins','secs'].forEach(k => { document.getElementById('num-'+k).textContent='00'; }); return; }
-  setRing('ring-days',  'num-days',  Math.floor(diff/86400000),        365);
-  setRing('ring-hours', 'num-hours', Math.floor((diff%86400000)/3600000), 24);
-  setRing('ring-mins',  'num-mins',  Math.floor((diff%3600000)/60000),    60);
-  setRing('ring-secs',  'num-secs',  Math.floor((diff%60000)/1000),       60);
-}
+      tick();
+      updateClock();
+      setInterval(tick, 1000);
+      setInterval(updateClock, 1000);
 
-function updateClock() {
-  const now = new Date();
-  const h = now.getHours(), m = now.getMinutes(), s = now.getSeconds();
-  const ampm = h >= 12 ? 'PM' : 'AM';
-  const hh = h % 12 || 12;
-  document.getElementById('live-time').textContent =
-    String(hh).padStart(2,'0')+':'+String(m).padStart(2,'0')+':'+String(s).padStart(2,'0')+' '+ampm;
-  const period = h < 12 ? 'morning' : h < 17 ? 'afternoon' : 'evening';
-  document.getElementById('greet-text').textContent = `Good ${period}, Maverick.`;
-}
+      function hostname(url) {
+        try {
+          return new URL(url).hostname.replace("www.", "");
+        } catch {
+          return url;
+        }
+      }
 
-tick(); updateClock();
-setInterval(tick, 1000);
-setInterval(updateClock, 1000);
+      function renderBookmarks(data) {
+        const section = document.getElementById("bm-section");
+        section.innerHTML = "";
 
-function hostname(url) {
-  try { return new URL(url).hostname.replace('www.',''); } catch { return url; }
-}
+        data.categories.forEach((cat) => {
+          const block = document.createElement("div");
+          block.className = "category-block";
 
-function renderBookmarks(data) {
-  const section = document.getElementById('bm-section');
-  section.innerHTML = '';
+          const header = document.createElement("div");
+          header.className = "category-header";
+          header.innerHTML = `<div class="line"></div><span class="emoji">${cat.emoji}</span><span class="tag">${cat.label}</span><div class="line"></div>`;
+          block.appendChild(header);
 
-  data.categories.forEach(cat => {
-    const block = document.createElement('div');
-    block.className = 'category-block';
+          const grid = document.createElement("div");
+          grid.className = "bookmarks-grid";
 
-    const header = document.createElement('div');
-    header.className = 'category-header';
-    header.innerHTML = `<div class="line"></div><span class="emoji">${cat.emoji}</span><span class="tag">${cat.label}</span><div class="line"></div>`;
-    block.appendChild(header);
+          cat.bookmarks.forEach((bm) => {
+            const a = document.createElement("a");
+            a.className = "bookmark";
+            a.href = bm.url;
+            a.target = "_blank";
+            a.rel = "noopener noreferrer";
+            a.innerHTML = `<div class="bookmark-icon">${bm.icon}</div><div class="bookmark-name">${bm.name}</div><div class="bookmark-url">${hostname(bm.url)}</div>`;
+            grid.appendChild(a);
+          });
 
-    const grid = document.createElement('div');
-    grid.className = 'bookmarks-grid';
+          const addBtn = document.createElement("div");
+          addBtn.className = "add-bm";
+          addBtn.innerHTML = `<div class="plus">+</div><div class="lbl">add here</div>`;
+          addBtn.addEventListener("click", () => {
+            const name = prompt(`Add to "${cat.label}" — Name:`);
+            if (!name) return;
+            const url = prompt("URL (include https://):");
+            if (!url) return;
+            const icon =
+              prompt("Emoji icon (optional, press Enter to skip):") || "🔗";
+            const a = document.createElement("a");
+            a.className = "bookmark";
+            a.href = url;
+            a.target = "_blank";
+            a.rel = "noopener noreferrer";
+            a.innerHTML = `<div class="bookmark-icon">${icon}</div><div class="bookmark-name">${name}</div><div class="bookmark-url">${hostname(url)}</div>`;
+            grid.insertBefore(a, addBtn);
+            alert(
+              `✅ Added! To save permanently, add this to bookmarks.json under category "${cat.id}":\n{\n  "name": "${name}",\n  "url": "${url}",\n  "icon": "${icon}"\n}`,
+            );
+          });
 
-    cat.bookmarks.forEach(bm => {
-      const a = document.createElement('a');
-      a.className = 'bookmark';
-      a.href = bm.url;
-      a.target = '_blank';
-      a.rel = 'noopener noreferrer';
-      a.innerHTML = `<div class="bookmark-icon">${bm.icon}</div><div class="bookmark-name">${bm.name}</div><div class="bookmark-url">${hostname(bm.url)}</div>`;
-      grid.appendChild(a);
-    });
+          grid.appendChild(addBtn);
+          block.appendChild(grid);
+          section.appendChild(block);
+        });
+      }
 
-    const addBtn = document.createElement('div');
-    addBtn.className = 'add-bm';
-    addBtn.innerHTML = `<div class="plus">+</div><div class="lbl">add here</div>`;
-    addBtn.addEventListener('click', () => {
-      const name = prompt(`Add to "${cat.label}" — Name:`);
-      if (!name) return;
-      const url = prompt('URL (include https://):');
-      if (!url) return;
-      const icon = prompt('Emoji icon (optional, press Enter to skip):') || '🔗';
-      const a = document.createElement('a');
-      a.className = 'bookmark';
-      a.href = url; a.target = '_blank'; a.rel = 'noopener noreferrer';
-      a.innerHTML = `<div class="bookmark-icon">${icon}</div><div class="bookmark-name">${name}</div><div class="bookmark-url">${hostname(url)}</div>`;
-      grid.insertBefore(a, addBtn);
-      alert(`✅ Added! To save permanently, add this to bookmarks.json under category "${cat.id}":\n{\n  "name": "${name}",\n  "url": "${url}",\n  "icon": "${icon}"\n}`);
-    });
-
-    grid.appendChild(addBtn);
-    block.appendChild(grid);
-    section.appendChild(block);
-  });
-}
-
-fetch('bookmarks.json')
-  .then(r => { if (!r.ok) throw new Error('Cannot load bookmarks.json'); return r.json(); })
-  .then(data => renderBookmarks(data))
-  .catch(err => {
-    document.getElementById('bm-section').innerHTML =
-      `<div class="error-msg">⚠ Could not load bookmarks.json — make sure it's in the same folder as index.html.<br><span style="opacity:0.5">${err.message}</span></div>`;
-  });
-</script>
-</body>
+      fetch("bookmarks.json")
+        .then((r) => {
+          if (!r.ok) throw new Error("Cannot load bookmarks.json");
+          return r.json();
+        })
+        .then((data) => renderBookmarks(data))
+        .catch((err) => {
+          document.getElementById("bm-section").innerHTML =
+            `<div class="error-msg">⚠ Could not load bookmarks.json — make sure it's in the same folder as index.html.<br><span style="opacity:0.5">${err.message}</span></div>`;
+        });
+    </script>
+  </body>
 </html>

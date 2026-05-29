@@ -1,0 +1,508 @@
+const bookmarksData = {
+  categories: [
+    {
+      id: "learning",
+      label: "learnings",
+      emoji: "📖",
+      bookmarks: [
+        {
+          name: "Namaste JavaScript (Hitesh Choudhary)",
+          url: "https://www.youtube.com/playlist?list=PLRAV69dS1uWT4v4iK1h6qejyhGObFH9_o",
+          icon: "🟨",
+        },
+        {
+          name: "Chai aur React",
+          url: "https://www.youtube.com/playlist?list=PLu71SKxNbfoBkkr8lblqtsJvxrw3j1tWC",
+          icon: "⚛️",
+        },
+        {
+          name: "Chai aur CSS",
+          url: "https://www.youtube.com/playlist?list=PLu71SKxNbfoCXO80Z4miZHTL5GxfFbz7A",
+          icon: "🎨",
+        },
+        {
+          name: "Chai aur Node.js",
+          url: "https://www.youtube.com/playlist?list=PLxamJ86SDCj28nzE9l6frczaVhPX7P7o7",
+          icon: "🟩",
+        },
+        {
+          name: "Chai aur JavaScript Backend",
+          url: "https://www.youtube.com/playlist?list=PLu71SKxNbfoBGh_8p_NS-ZAh6v7HhYqHW",
+          icon: "🛠️",
+        },
+        {
+          name: "Chai aur React (Interviews)",
+          url: "https://www.youtube.com/playlist?list=PLu71SKxNbfoDqgPchmvIsL4hTnJIrtige",
+          icon: "💼",
+        },
+        {
+          name: "Chai aur JavaScript (Hindi)",
+          url: "https://www.youtube.com/playlist?list=PLu71SKxNbfoBuX3f4EOACle2y-tRC5Q37",
+          icon: "📜",
+        },
+        {
+          name: "Sigma Web Development Course",
+          url: "https://www.youtube.com/playlist?list=PLEyL54o6DAlnaMRaU7UiHphqHQgY82hx4",
+          icon: "💻",
+        },
+        {
+          name: "JavaScript Full Course",
+          url: "https://www.youtube.com/watch?v=xwI5OBEnsZU",
+          icon: "🟨",
+        },
+      ],
+    },
+    {
+      id: "dev",
+      label: "Development",
+      emoji: "⚙️",
+      bookmarks: [
+        { name: "GitHub", url: "https://github.com", icon: "🐙" },
+        { name: "npm", url: "https://www.npmjs.com", icon: "📦" },
+        { name: "React", url: "https://react.dev", icon: "⚛️" },
+        {
+          name: "TypeScript",
+          url: "https://www.typescriptlang.org",
+          icon: "🔷",
+        },
+        { name: "Vite", url: "https://vite.dev", icon: "⚡" },
+        {
+          name: "Docker Docs",
+          url: "https://docs.docker.com",
+          icon: "🐳",
+        },
+        {
+          name: "MDN Docs",
+          url: "https://developer.mozilla.org",
+          icon: "📚",
+        },
+        { name: "CodePen", url: "https://codepen.io", icon: "🖊️" },
+        {
+          name: "VS Code Docs",
+          url: "https://code.visualstudio.com/docs",
+          icon: "🖥️",
+        },
+        { name: "Git SCM", url: "https://git-scm.com/doc", icon: "🌿" },
+        { name: "Postman", url: "https://www.postman.com", icon: "📬" },
+        {
+          name: "Stack Overflow",
+          url: "https://stackoverflow.com",
+          icon: "💬",
+        },
+      ],
+    },
+    {
+      id: "javascript",
+      label: "JavaScript",
+      emoji: "🟨",
+      bookmarks: [
+        {
+          name: "JavaScript.info",
+          url: "https://javascript.info",
+          icon: "📖",
+        },
+        {
+          name: "MDN JS Reference",
+          url: "https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference",
+          icon: "📚",
+        },
+        {
+          name: "Node.js Docs",
+          url: "https://nodejs.org/en/docs",
+          icon: "🟢",
+        },
+        { name: "Express.js", url: "https://expressjs.com", icon: "🚂" },
+        { name: "Next.js", url: "https://nextjs.org/docs", icon: "▲" },
+        { name: "Bun", url: "https://bun.sh", icon: "🍞" },
+        {
+          name: "ES6 Features",
+          url: "https://es6-features.org",
+          icon: "✨",
+        },
+        {
+          name: "You Don't Know JS",
+          url: "https://github.com/getify/You-Dont-Know-JS",
+          icon: "🔍",
+        },
+        {
+          name: "30 Seconds of Code",
+          url: "https://www.30secondsofcode.org",
+          icon: "⏱️",
+        },
+        { name: "JSDoc", url: "https://jsdoc.app", icon: "📝" },
+        { name: "Deno", url: "https://deno.com", icon: "🦕" },
+        { name: "Lodash", url: "https://lodash.com/docs", icon: "🔧" },
+      ],
+    },
+    {
+      id: "dsa",
+      label: "DSA & Competitive",
+      emoji: "🧮",
+      bookmarks: [
+        { name: "LeetCode", url: "https://leetcode.com", icon: "🟠" },
+        { name: "Codeforces", url: "https://codeforces.com", icon: "🔵" },
+        {
+          name: "HackerRank",
+          url: "https://www.hackerrank.com",
+          icon: "🟢",
+        },
+        {
+          name: "GeeksforGeeks DSA",
+          url: "https://www.geeksforgeeks.org/data-structures",
+          icon: "🌲",
+        },
+        { name: "Neetcode", url: "https://neetcode.io", icon: "🐦" },
+        { name: "Visualgo", url: "https://visualgo.net", icon: "👁️" },
+        {
+          name: "CP Algorithms",
+          url: "https://cp-algorithms.com",
+          icon: "📐",
+        },
+        {
+          name: "CSES Problem Set",
+          url: "https://cses.fi/problemset",
+          icon: "🧩",
+        },
+        {
+          name: "Big-O Cheat Sheet",
+          url: "https://www.bigocheatsheet.com",
+          icon: "📊",
+        },
+        {
+          name: "AlgoExpert",
+          url: "https://www.algoexpert.io",
+          icon: "🧠",
+        },
+        {
+          name: "Excalidraw (Whiteboard)",
+          url: "https://excalidraw.com",
+          icon: "✏️",
+        },
+        {
+          name: "Programiz DSA",
+          url: "https://www.programiz.com/dsa",
+          icon: "🎓",
+        },
+      ],
+    },
+    {
+      id: "deployment",
+      label: "Deployment & DevOps",
+      emoji: "🚀",
+      bookmarks: [
+        { name: "Vercel", url: "https://vercel.com", icon: "▲" },
+        { name: "Netlify", url: "https://www.netlify.com", icon: "🟩" },
+        { name: "Railway", url: "https://railway.app", icon: "🚃" },
+        { name: "Render", url: "https://render.com", icon: "🌐" },
+        { name: "Fly.io", url: "https://fly.io", icon: "✈️" },
+        { name: "Supabase", url: "https://supabase.com", icon: "⚡" },
+        {
+          name: "PlanetScale",
+          url: "https://planetscale.com",
+          icon: "🪐",
+        },
+        {
+          name: "DigitalOcean",
+          url: "https://cloud.digitalocean.com",
+          icon: "🌊",
+        },
+        {
+          name: "AWS Console",
+          url: "https://aws.amazon.com/console",
+          icon: "☁️",
+        },
+        {
+          name: "GitHub Actions",
+          url: "https://docs.github.com/en/actions",
+          icon: "⚙️",
+        },
+        { name: "Docker Hub", url: "https://hub.docker.com", icon: "🐳" },
+        {
+          name: "Cloudflare",
+          url: "https://dash.cloudflare.com",
+          icon: "🔶",
+        },
+        {
+          name: "Nginx Docs",
+          url: "https://nginx.org/en/docs",
+          icon: "📡",
+        },
+        { name: "Upstash", url: "https://upstash.com", icon: "🔺" },
+      ],
+    },
+    {
+      id: "design",
+      label: "Design & UI",
+      emoji: "🎨",
+      bookmarks: [
+        { name: "Figma", url: "https://www.figma.com", icon: "🎨" },
+        {
+          name: "Tailwind CSS",
+          url: "https://tailwindcss.com",
+          icon: "💨",
+        },
+        { name: "Lucide Icons", url: "https://lucide.dev", icon: "✨" },
+        { name: "Motion", url: "https://motion.dev", icon: "🎞️" },
+        { name: "Coolors", url: "https://coolors.co", icon: "🌈" },
+        { name: "Flowbite", url: "https://flowbite.com", icon: "🧩" },
+        { name: "HyperUI", url: "https://hyperui.dev", icon: "🧱" },
+        {
+          name: "Creative Tim",
+          url: "https://www.creative-tim.com",
+          icon: "🎯",
+        },
+        { name: "DivMagic", url: "https://divmagic.com", icon: "🪄" },
+        { name: "Flaticon", url: "https://www.flaticon.com", icon: "🖼️" },
+      ],
+    },
+    {
+      id: "ai",
+      label: "AI Tools",
+      emoji: "🤖",
+      bookmarks: [
+        { name: "ChatGPT", url: "https://chatgpt.com", icon: "💬" },
+        { name: "Claude", url: "https://claude.ai", icon: "🧠" },
+        {
+          name: "Claude New Chat",
+          url: "https://claude.ai/new",
+          icon: "✨",
+        },
+        { name: "Grok", url: "https://grok.com", icon: "🚀" },
+        {
+          name: "GitHub Copilot",
+          url: "https://github.com/features/copilot",
+          icon: "🤖",
+        },
+        {
+          name: "Perplexity",
+          url: "https://www.perplexity.ai",
+          icon: "🔭",
+        },
+      ],
+    },
+    {
+      id: "learning",
+      label: "Learning & Articles",
+      emoji: "📖",
+      bookmarks: [
+        {
+          name: "freeCodeCamp",
+          url: "https://www.freecodecamp.org",
+          icon: "🏕️",
+        },
+        {
+          name: "The Odin Project",
+          url: "https://www.theodinproject.com",
+          icon: "⚔️",
+        },
+        { name: "CS50", url: "https://cs50.harvard.edu", icon: "🎓" },
+        { name: "Roadmap.sh", url: "https://roadmap.sh", icon: "🗺️" },
+        { name: "Medium", url: "https://medium.com", icon: "✍️" },
+        { name: "CSS Tricks", url: "https://css-tricks.com", icon: "🎨" },
+        { name: "Dev.to", url: "https://dev.to", icon: "👩‍💻" },
+        { name: "Fireship", url: "https://fireship.io", icon: "🔥" },
+        { name: "Scrimba", url: "https://scrimba.com", icon: "📼" },
+        {
+          name: "Frontend Masters",
+          url: "https://frontendmasters.com",
+          icon: "🏔️",
+        },
+      ],
+    },
+    {
+      id: "inspiration",
+      label: "Inspiration",
+      emoji: "💡",
+      bookmarks: [
+        { name: "Dribbble", url: "https://dribbble.com", icon: "🏀" },
+        { name: "Awwwards", url: "https://www.awwwards.com", icon: "🏆" },
+        {
+          name: "Site Inspire",
+          url: "https://www.siteinspire.com",
+          icon: "🌐",
+        },
+        {
+          name: "Pinterest",
+          url: "https://se.pinterest.com",
+          icon: "📌",
+        },
+        { name: "Unsplash", url: "https://unsplash.com", icon: "📸" },
+        { name: "Pexels", url: "https://www.pexels.com", icon: "🌄" },
+      ],
+    },
+    {
+      id: "tools",
+      label: "Utilities & Tools",
+      emoji: "🛠️",
+      bookmarks: [
+        {
+          name: "Proton Password Generator",
+          url: "https://proton.me/pass/password-generator",
+          icon: "🔐",
+        },
+        { name: "RegExr", url: "https://regexr.com", icon: "🔍" },
+        {
+          name: "JSON Formatter",
+          url: "https://jsonformatter.curiousconcept.com",
+          icon: "📋",
+        },
+        { name: "Can I Use", url: "https://caniuse.com", icon: "❓" },
+        {
+          name: "Squoosh (Image Compress)",
+          url: "https://squoosh.app",
+          icon: "🖼️",
+        },
+        {
+          name: "Ray.so (Code Screenshots)",
+          url: "https://ray.so",
+          icon: "📸",
+        },
+        {
+          name: "Transform.tools",
+          url: "https://transform.tools",
+          icon: "🔄",
+        },
+        {
+          name: "Bundle Phobia",
+          url: "https://bundlephobia.com",
+          icon: "📦",
+        },
+      ],
+    },
+    {
+      id: "entertainment",
+      label: "Entertainment",
+      emoji: "🎮",
+      bookmarks: [
+        { name: "Chess.com", url: "https://www.chess.com", icon: "♟️" },
+      ],
+    },
+  ],
+};
+
+const TARGET = new Date("2026-10-09T00:00:00");
+const CIRC = 2 * Math.PI * 43;
+
+function setRing(ringId, numId, value, max) {
+  const pct = Math.max(0, Math.min(1, value / max));
+  const el = document.getElementById(ringId);
+  el.style.strokeDasharray = CIRC;
+  el.style.strokeDashoffset = CIRC * (1 - pct);
+  document.getElementById(numId).textContent = String(value).padStart(
+    2,
+    "0",
+  );
+}
+
+function tick() {
+  const diff = TARGET - new Date();
+  if (diff <= 0) {
+    ["days", "hours", "mins", "secs"].forEach((k) => {
+      document.getElementById("num-" + k).textContent = "00";
+    });
+    return;
+  }
+  setRing("ring-days", "num-days", Math.floor(diff / 86400000), 365);
+  setRing(
+    "ring-hours",
+    "num-hours",
+    Math.floor((diff % 86400000) / 3600000),
+    24,
+  );
+  setRing(
+    "ring-mins",
+    "num-mins",
+    Math.floor((diff % 3600000) / 60000),
+    60,
+  );
+  setRing("ring-secs", "num-secs", Math.floor((diff % 60000) / 1000), 60);
+}
+
+function updateClock() {
+  const now = new Date();
+  const h = now.getHours(),
+    m = now.getMinutes(),
+    s = now.getSeconds();
+  const ampm = h >= 12 ? "PM" : "AM";
+  const hh = h % 12 || 12;
+  document.getElementById("live-time").textContent =
+    String(hh).padStart(2, "0") +
+    ":" +
+    String(m).padStart(2, "0") +
+    ":" +
+    String(s).padStart(2, "0") +
+    " " +
+    ampm;
+  const period = h < 12 ? "morning" : h < 17 ? "afternoon" : "evening";
+  document.getElementById("greet-text").textContent =
+    `Good ${period}, Maverick.`;
+}
+
+tick();
+updateClock();
+setInterval(tick, 1000);
+setInterval(updateClock, 1000);
+
+function hostname(url) {
+  try {
+    return new URL(url).hostname.replace("www.", "");
+  } catch {
+    return url;
+  }
+}
+
+function renderBookmarks(data) {
+  const section = document.getElementById("bm-section");
+  section.innerHTML = "";
+
+  data.categories.forEach((cat) => {
+    const block = document.createElement("div");
+    block.className = "category-block";
+
+    const header = document.createElement("div");
+    header.className = "category-header";
+    header.innerHTML = `<div class="line"></div><span class="emoji">${cat.emoji}</span><span class="tag">${cat.label}</span><div class="line"></div>`;
+    block.appendChild(header);
+
+    const grid = document.createElement("div");
+    grid.className = "bookmarks-grid";
+
+    cat.bookmarks.forEach((bm) => {
+      const a = document.createElement("a");
+      a.className = "bookmark";
+      a.href = bm.url;
+      a.target = "_blank";
+      a.rel = "noopener noreferrer";
+      a.innerHTML = `<div class="bookmark-icon">${bm.icon}</div><div class="bookmark-name">${bm.name}</div><div class="bookmark-url">${hostname(bm.url)}</div>`;
+      grid.appendChild(a);
+    });
+
+    const addBtn = document.createElement("div");
+    addBtn.className = "add-bm";
+    addBtn.innerHTML = `<div class="plus">+</div><div class="lbl">add here</div>`;
+    addBtn.addEventListener("click", () => {
+      const name = prompt(`Add to "${cat.label}" — Name:`);
+      if (!name) return;
+      const url = prompt("URL (include https://):");
+      if (!url) return;
+      const icon =
+        prompt("Emoji icon (optional, press Enter to skip):") || "🔗";
+      const a = document.createElement("a");
+      a.className = "bookmark";
+      a.href = url;
+      a.target = "_blank";
+      a.rel = "noopener noreferrer";
+      a.innerHTML = `<div class="bookmark-icon">${icon}</div><div class="bookmark-name">${name}</div><div class="bookmark-url">${hostname(url)}</div>`;
+      grid.insertBefore(a, addBtn);
+      alert(
+        `✅ Added! To save permanently, add this to bookmarks.json under category "${cat.id}":\n{\n  "name": "${name}",\n  "url": "${url}",\n  "icon": "${icon}"\n}`,
+      );
+    });
+
+    grid.appendChild(addBtn);
+    block.appendChild(grid);
+    section.appendChild(block);
+  });
+}
+
+renderBookmarks(bookmarksData);
